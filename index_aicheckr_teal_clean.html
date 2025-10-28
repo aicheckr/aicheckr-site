@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AIcheckr — AI or Real?</title>
+<meta name="description" content="Tag @AIcheckr or DM a post. Get a verdict: AI / Real / Inconclusive + confidence and a shareable receipt.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#BFF5F5;        /* light cyan (for readability with black text) */
+    --bg-2:#AEEEEE;      /* slightly darker for section blocks */
+    --ink:#000000;       /* black text */
+    --ink-soft:#111;     /* for small labels */
+    --border:#0aa;       /* teal border */
+    --focus:#088;        /* focus ring */
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    color:var(--ink);
+    background:
+      linear-gradient(180deg, var(--bg) 0%, #B3F0F0 100%);
+  }
+  a{color:var(--ink); text-decoration: underline;}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 16px 64px}
+  header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+  .logo{
+    width:56px;height:56px;border-radius:50%;display:grid;place-items:center;
+    background:#6FE2E2;border:3px solid #0aa;color:#000;font-weight:800;letter-spacing:.4px;
+  }
+  h1{font-size:28px;margin:0 0 2px 0;font-weight:800}
+  .sub{margin:0; font-size:14px; color:var(--ink-soft)}
+  .grid{display:grid;gap:16px}
+  @media(min-width:860px){.grid{grid-template-columns:1.1fr .9fr}}
+  .card{
+    background:var(--bg-2);
+    border:2px solid var(--border);
+    border-radius:14px;
+    padding:16px;
+  }
+  h2{margin:0 0 10px 0;font-size:22px}
+  label{display:block;margin:10px 0 6px;font-weight:700}
+  input[type="url"], input[type="file"]{
+    width:100%;padding:12px 14px;border-radius:10px;border:2px solid var(--border);
+    background:white;color:var(--ink);font-size:15px;outline:none;
+  }
+  input[type="url"]:focus{border-color:var(--focus); box-shadow:0 0 0 3px rgba(0,136,136,.2)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:#7FEAEA;color:#000;border:2px solid #0aa;border-radius:12px;
+    padding:12px 16px;font-weight:800;cursor:pointer;
+  }
+  .muted{font-size:12px;color:var(--ink-soft)}
+  ul{margin:0 0 0 18px;padding:0}
+  li{margin:6px 0}
+  .cols{display:grid;gap:16px;margin-top:16px}
+  @media(min-width:860px){.cols{grid-template-columns:1fr 1fr}}
+  footer{margin-top:26px;font-size:12px;color:var(--ink-soft);text-align:center}
+  .result{
+    border:2px dashed var(--border);
+    background:#D3F8F8;border-radius:12px;padding:12px;margin-top:10px
+  }
+  .tag{display:inline-block;border:2px solid #000;border-radius:999px;padding:4px 10px;margin-right:8px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">AI?</div>
+      <div>
+        <h1>AIcheckr</h1>
+        <p class="sub">Tag @AIcheckr or DM a post → verdict: <b>AI / Real / Inconclusive</b> + confidence. Shareable receipt.</p>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Paste URL / Upload</h2>
+        <label for="posturl">Post link</label>
+        <input type="url" id="posturl" placeholder="https://instagram.com/p/...">
+        <label for="file">…or upload the original file</label>
+        <input type="file" id="file" accept="image/*,video/*">
+        <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap">
+          <button class="btn" id="checkBtn">Get Verdict</button>
+          <span class="muted">We don’t store files without consent.</span>
+        </div>
+        <div class="result" id="demoResult" style="display:none"></div>
+      </div>
+
+      <div class="card">
+        <h2>Example Result</h2>
+        <div class="tag">Likely Real</div>
+        <div class="tag">Confidence 92%</div>
+        <p class="muted" style="margin-top:8px">Why: clean compression; plausible EXIF; Content Credentials present.</p>
+      </div>
+    </section>
+
+    <section class="cols">
+      <div class="card">
+        <h2>How it works</h2>
+        <ul>
+          <li><b>Provenance</b>: Content Credentials (C2PA) & capture/edit markers.</li>
+          <li><b>Forensics</b>: Compression patterns, metadata & model signals.</li>
+          <li><b>Heuristics</b>: Visual cues (repeating textures, odd artifacts).</li>
+        </ul>
+        <p>We return <b>AI</b>, <b>Real</b>, or <b>Inconclusive</b> with a confidence % and a one‑line reason.</p>
+      </div>
+      <div class="card">
+        <h2>What “Inconclusive” means</h2>
+        <p>Signals conflict or quality is too low. We won’t guess.</p>
+        <p>For a stronger read: send the <b>original file</b> (not a screenshot) or a higher‑resolution version.</p>
+      </div>
+    </section>
+
+    <section class="cols">
+      <div class="card">
+        <h2>Appeal</h2>
+        <p>Think we got it wrong? Reply to your receipt and attach the original file. We’ll re‑check and update the verdict if warranted.</p>
+      </div>
+      <div class="card">
+        <h2>For creators & brands</h2>
+        <ul>
+          <li><b>Verified‑Real</b> receipts for campaigns and profile media.</li>
+          <li>Embeddable badge & weekly report.</li>
+          <li>Beta: <a href="mailto:hello@aicheckr.app">hello@aicheckr.app</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      AIcheckr — results are probabilistic and may be imperfect. Avoid definitive claims about people.
+    </footer>
+  </div>
+
+<script>
+// Demo-only: keeps everything client-side
+const btn = document.getElementById('checkBtn');
+btn.addEventListener('click', () => {
+  const url = (document.getElementById('posturl').value || '').trim();
+  if(!url){ alert('Paste a post URL first'); return; }
+  const out = document.getElementById('demoResult');
+  const verdicts = ['Likely AI','Likely Real','Inconclusive'];
+  const pick = verdicts[Math.floor(Math.random()*verdicts.length)];
+  const conf = pick === 'Inconclusive' ? '' : ' — Confidence ' + (80+Math.floor(Math.random()*19)) + '%';
+  out.style.display = 'block';
+  out.textContent = pick + conf + ' • Reason: sample rationale.';
+});
+</script>
+
+</body>
+</html>
